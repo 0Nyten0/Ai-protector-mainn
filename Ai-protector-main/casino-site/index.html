@@ -1,0 +1,155 @@
+    <!DOCTYPE html>
+    <html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Grand Palace Casino</title>
+        <link rel="stylesheet" href="style.css">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="casino-layout">
+            <aside class="sidebar">
+                <div class="brand">
+                    <i class="fa-solid fa-dice-d20"></i> GRAND PALACE
+                </div>
+                <nav class="side-nav">
+                    <a href="#" class="nav-item active" data-page="home"><i class="fa-solid fa-house"></i> Главная</a>
+                    <a href="#" class="nav-item" data-page="slots"><i class="fa-solid fa-slot-machine"></i> Слоты</a>
+                    <a href="#" class="nav-item" data-page="crash"><i class="fa-solid fa-rocket"></i> Crash Игры</a>
+                    <a href="#" class="nav-item" data-page="live"><i class="fa-solid fa-headset"></i> Live Казино</a>
+                    <a href="#" class="nav-item" data-page="promos"><i class="fa-solid fa-gift"></i> Бонусы</a>
+                </nav>
+                <div class="live-feed">
+                    <div class="feed-title">Сейчас выигрывают</div>
+                    <div class="feed-container" id="recentWinsFeed"></div>
+                </div>
+            </aside>
+
+            <main class="main-content">
+                <header class="top-header">
+                    <div class="user-controls">
+                        <div class="wallet">
+                            <div class="balance-info">
+                                <span class="currency">KZT</span>
+                                <span id="mainBalance">150000.00</span>
+                            </div>
+                            <button id="headerDepositBtn" class="btn-deposit">Пополнить</button>
+                        </div>
+                        <div class="profile-icon"><i class="fa-solid fa-user"></i></div>
+                    </div>
+                </header>
+
+                <div id="page-home" class="page-view active">
+                    <div class="hero-banner">
+                        <div class="banner-content">
+                            <h1>БОНУС 200% НА ПЕРВЫЙ ДЕПОЗИТ</h1>
+                            <p>Играй в лучшие слоты от мировых провайдеров</p>
+                            <button class="btn-primary" onclick="document.querySelector('[data-page=\'slots\']').click()">ИГРАТЬ СЕЙЧАС</button>
+                        </div>
+                    </div>
+
+                    <div class="section-title">
+                        <h2>🔥 Популярные Слоты</h2>
+                        <a href="#" class="view-all">Смотреть все</a>
+                    </div>
+                    <div class="game-grid" id="popularSlotsGrid">
+                        <div class="game-card" data-game="sweet-bonanza">
+                            <div class="game-thumb bonanza-bg"></div>
+                            <div class="game-info">
+                                <span class="game-name">Sweet Bonanza</span>
+                                <span class="provider">Pragmatic Play</span>
+                            </div>
+                            <div class="play-overlay"><button class="btn-play"><i class="fa-solid fa-play"></i></button></div>
+                        </div>
+                        <div class="game-card" data-game="gates-olympus">
+                            <div class="game-thumb olympus-bg"></div>
+                            <div class="game-info">
+                                <span class="game-name">Gates of Olympus</span>
+                                <span class="provider">Pragmatic Play</span>
+                            </div>
+                            <div class="play-overlay"><button class="btn-play"><i class="fa-solid fa-play"></i></button></div>
+                        </div>
+                        <div class="game-card" data-game="book-dead">
+                            <div class="game-thumb book-bg"></div>
+                            <div class="game-info">
+                                <span class="game-name">Book of Dead</span>
+                                <span class="provider">Play'n GO</span>
+                            </div>
+                            <div class="play-overlay"><button class="btn-play"><i class="fa-solid fa-play"></i></button></div>
+                        </div>
+                        <div class="game-card" data-game="dog-house">
+                            <div class="game-thumb dog-bg"></div>
+                            <div class="game-info">
+                                <span class="game-name">The Dog House</span>
+                                <span class="provider">Pragmatic Play</span>
+                            </div>
+                            <div class="play-overlay"><button class="btn-play"><i class="fa-solid fa-play"></i></button></div>
+                        </div>
+                    </div>
+
+                    <div class="section-title" style="margin-top: 40px;">
+                        <h2>🚀 Crash Игры</h2>
+                    </div>
+                    <div class="game-grid">
+                        <div class="game-card" data-game="aviator">
+                            <div class="game-thumb aviator-bg"></div>
+                            <div class="game-info">
+                                <span class="game-name">Aviator</span>
+                                <span class="provider">Spribe</span>
+                            </div>
+                            <div class="play-overlay"><button class="btn-play"><i class="fa-solid fa-play"></i></button></div>
+                        </div>
+                        <div class="game-card" data-game="space-xy">
+                            <div class="game-thumb space-bg"></div>
+                            <div class="game-info">
+                                <span class="game-name">Space XY</span>
+                                <span class="provider">BGaming</span>
+                            </div>
+                            <div class="play-overlay"><button class="btn-play"><i class="fa-solid fa-play"></i></button></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="game-interface" class="page-view" style="display: none;">
+                    <div class="game-header">
+                        <button id="backToLobby" class="btn-back"><i class="fa-solid fa-arrow-left"></i> В лобби</button>
+                        <h2 id="currentGameTitle">Game Name</h2>
+                        <div class="game-balance">Баланс: <span id="ingameBalance">150000</span> KZT</div>
+                    </div>
+
+                    <div class="game-frame-container" id="gameEngineArea">
+                    </div>
+                </div>
+
+            </main>
+        </div>
+
+        <div id="globalDepositModal" class="modal-overlay">
+            <div class="modal-box">
+                <div class="modal-header">
+                    <h3>Касса - Пополнение</h3>
+                    <button class="close-modal"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <div class="payment-methods">
+                    <div class="method active">Visa / Mastercard</div>
+                    <div class="method">Kaspi.kz</div>
+                    <div class="method">Crypto</div>
+                </div>
+                <div class="deposit-amounts">
+                    <button data-val="5000">5,000 ₸</button>
+                    <button data-val="10000">10,000 ₸</button>
+                    <button data-val="25000" class="popular">25,000 ₸</button>
+                    <button data-val="100000">100,000 ₸</button>
+                </div>
+                <div class="custom-amount">
+                    <input type="number" id="customDeposit" placeholder="Другая сумма...">
+                    <button id="confirmDeposit" class="btn-success">Оплатить</button>
+                </div>
+            </div>
+        </div>
+
+        <script src="app.js"></script>
+        <script src="logger.js"></script>
+    </body>
+    </html>
